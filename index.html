@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sable, Sueur & Stratégie </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Raleway:wght@300;400;700&display=swap');
+        
+        :root {
+            --primary: #E5B45E;
+            --primary-dark: #D9A24A;
+            --accent: #F0A500;
+            --dark: #333333;
+            --light: #f8f8f8;
+            --white: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1600/600');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: linear-gradient(to top right, var(--light) 49%, transparent 51%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-text {
+            font-size: 1.5em;
+            margin: 20px 0 40px;
+            font-weight: 300;
+        }
+        
+        .button {
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 15px 32px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4);
+        }
+        
+        .button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(240, 165, 0, 0.3);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5em;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 15px auto 0;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-content {
+            padding: 30px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .testimonials {
+            background-color: var(--white);
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .testimonials::before, .testimonials::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 70px;
+        }
+        
+        .testimonials::before {
+            top: 0;
+            background: linear-gradient(to bottom right, var(--light) 49%, transparent 51%);
+        }
+        
+        .testimonials::after {
+            bottom: 0;
+            background: linear-gradient(to top right, var(--light) 49%, transparent 51%);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 5em;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: serif;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        .progress-container {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 50px 0;
+            height: 20px;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            width: 65%;
+            position: relative;
+            transition: width 1.5s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            right: 10px;
+            top: -25px;
+            font-weight: 600;
+        }
+        
+        .donate-section {
+            text-align: center;
+            padding: 60px 0;
+            background-color: var(--white);
+        }
+        
+        .donate-btn {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: var(--white);
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(229, 180, 94, 0.3);
+        }
+        
+        .donate-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(229, 180, 94, 0.4);
+        }
+        
+        .social-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: var(--primary);
+            text-decoration: none;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            color: var(--accent);
+            box-shadow: 0 10px 20px var(--shadow);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .countdown-item {
+            background-color: var(--white);
+            padding: 20px 0;
+            width: 100px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        
+        .countdown-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .countdown-label {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 70px 20px;
+            }
+            
+            header h1 {
+                font-size: 2.5em;
+            }
+            
+            .hero-text {
+                font-size: 1.2em;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-header h2 {
+                font-size: 2em;
+            }
+            
+            .countdown-item {
+                width: 70px;
+                padding: 15px 0;
+            }
+            
+            .countdown-number {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <h1>Sable, Sueur & Stratégie</h1>
+            <p class="hero-text">Together, We Rise. Help Sophie Conquer the Legendary Marathon des Sables</p>
+            <a href="https://www.leetchi.com/c/sophie-marathon-des-sables" class="button">SUPPORT THE JOURNEY →</a>
+        </div>
+    </header>
+
+    <!-- Countdown Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Race Countdown</h2>
+                <p>The ultimate test of human endurance begins soon</p>
+            </div>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number">42</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">18</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">56</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">33</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Dream Behind the Challenge</h2>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <p>After years of dreaming and months of intense preparation, Sophie is taking on the legendary Marathon des Sables - often called "the toughest footrace on Earth." This extraordinary challenge represents more than just a physical test; it's a journey of personal transformation and a testament to the human spirit.</p>
+                    <p>For six grueling days, Sophie will traverse 250 kilometers across the unforgiving Sahara Desert, carrying everything she needs to survive on her back. Through scorching temperatures, towering sand dunes, and rugged terrain, she'll push beyond her limits to achieve something truly extraordinary.</p>
+                    <p>But this journey isn't one she can make alone. Your support - both financial and emotional - will be the wind beneath her wings as she takes on this legendary challenge.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenge Details Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Challenge</h2>
+                <p>What makes the Marathon des Sables the ultimate test</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🏜️</div>
+                    <h3>Extreme Environment</h3>
+                    <p>Temperatures soar above 50°C during the day and drop below freezing at night. The Sahara Desert shows no mercy.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📏</div>
+                    <h3>Epic Distance</h3>
+                    <p>A multi-stage ultramarathon spanning 250 kilometers (155 miles) - equivalent to 6 regular marathons in 6 days.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎒</div>
+                    <h3>Self-Sufficiency</h3>
+                    <p>Competitors must carry all their own food, equipment and supplies, with only water and tents provided by organizers.</p>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+                <div class="progress-text">€2,275 of €3,500 raised</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Journey So Far</h2>
+                <p>From training days to countdown moments</p>
+            </div>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="/api/placeholder/600/400" alt="Sophie training in extreme heat conditions" />
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/600/400" alt="Practice runs with full equipment" />
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/600/400" alt="Marathon des Sables terrain preview" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    
+
+    <!-- Donate Section -->
+    <section class="donate-section">
+        <div class="container">
+            <h2>Join Sophie's Support Team</h2>
+            <p>Your contribution helps cover essential race fees, specialized equipment, medical preparations, and travel costs to Morocco. Every donation, no matter the size, brings Sophie one step closer to the finish line.</p>
+            <a href="https://www.leetchi.com/fr/c/sable-sueur-strategie-aidez-moi-a-entrer-dans-la-legende-1100353?utm_source=native&utm_medium=social_sharing&fbclid=IwY2xjawJwn2ZleHRuA2FlbQIxMAABHrM76mW0pm9z9xCKFIiUvLbE5-J9Fuvvr-jgTJcUqLSg0SpfGw-JsuYJByPx_aem_gwTsB-BfFX4ScVPh-4lx7Q" class="donate-btn">DONATE NOW</a>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Follow The Journey</h2>
+                <p>Stay connected for real-time updates before, during and after the race</p>
+            </div>
+            <div class="social-icons">
+                <a href="https://instagram.com/sophie_mds" target="_blank" class="social-icon">📸</a>
+                <a href="https://twitter.com/sophie_mds" target="_blank" class="social-icon">🐦</a>
+                <a href="https://facebook.com/sophiemds" target="_blank" class="social-icon">📘</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3>Sable, Sueur & Stratégie</h3>
+            <div class="footer-links">
+                <a href="https://www.marathondessables.com/" target="_blank">Official MDS Website</a>
+                <a href="mailto:sophie.mds@example.com">Contact Sophie</a>
+                <a href="https://www.leetchi.com/c/sophie-marathon-des-sables" target="_blank">Donation Page</a>
+            </div>
+            <p class="copyright">© 2025 Marathon des Sables Support Campaign | All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>
